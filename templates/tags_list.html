@@ -1,0 +1,38 @@
+{% extends "includes/base.html" %}
+{% block content %}
+
+  <h1>Tags List</h1>
+
+  {% if tag_list %}
+    <button type="button" class="btn btn-primary float-right text-white">
+      <a class="text-light text-decoration-none" href="{% url "todo_list:tag-create" %}">Add tags</a>
+    </button>
+    <table class="table">
+      <tr>
+        <th>Name</th>
+        <th>Update</th>
+        <th>Delete</th>
+
+      </tr>
+      {% for tag in tag_list %}
+        <tr>
+          <td><h5>{{ tag.name }}</h5></td>
+          <td>
+            <form method="get" action="{% url "todo_list:tag-update" tag.id %}">
+              {% csrf_token %}<input class="btn btn-secondary" type="submit" value="Update">
+            </form>
+          </td>
+          <td>
+            <form method="POST" action="{% url "todo_list:tag-delete" tag.id %}">
+              {% csrf_token %}<input class="btn btn-secondary" type="submit" value="Delete">
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    </table>
+
+  {% else %}
+    <p>There are no tags</p>
+  {% endif %}
+
+{% endblock %}

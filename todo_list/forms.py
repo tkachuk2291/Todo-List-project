@@ -1,6 +1,6 @@
 from django import forms
 
-from todo_list.models import Task
+from todo_list.models import Task, Tag
 
 
 class TaskCreateForm(forms.ModelForm):
@@ -12,3 +12,9 @@ class TaskCreateForm(forms.ModelForm):
             "is_done",
             "tags",
         )
+
+
+class TagCreateForm(forms.ModelForm):
+    class Meta:
+        model = Tag
+        fields = ("name",)

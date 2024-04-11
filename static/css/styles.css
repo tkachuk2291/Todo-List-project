@@ -43,3 +43,7 @@
     display: inline-block;
 }
 
+.button-position {
+    float: right;
+    color:white;
+}

@@ -6,7 +6,7 @@
   <div class="container">
     <div class="row justify-content-center text-center">
       <div class="col-md-8">
-        <h1 class="text-center">{{ object|yesno:"Update,Create" }} task</h1>
+        <h1 class="text-center">{{ object|yesno:"Update,Create" }} tags </h1>
         <form action="" method="post">
           {% csrf_token %}
           {{ form|crispy }}

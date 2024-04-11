@@ -2,8 +2,8 @@
   <div class="row justify-content-center">
     <div class="col-md-10">
       <ul class="sidebar-nav list-group">
-        <li class="list-group-item "><a href="#">Home</a></li>
-        <li class="list-group-item"><a href="#">Tags</a></li>
+        <li class="list-group-item "><a href="{% url 'todo_list:home-page' %}">Home</a></li>
+        <li class="list-group-item"><a href="{% url "todo_list:tags" %}">Tags</a></li>
       </ul>
     </div>
   </div>
