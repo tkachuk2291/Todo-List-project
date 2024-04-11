@@ -1,0 +1,65 @@
+{% extends "includes/base.html" %}
+
+{% block content %}
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="container text-center">
+          <h1>TODO list</h1>
+          <div class="add-task-container">
+            <form action="{% url "todo_list:task-create" %}" method="get">
+              <button class="btn btn-primary add-task-btn">Add new task</button>
+            </form>
+          </div>
+          <br>
+          <div class="tasks-container">
+            {% for task in tasks_list %}
+              <div class="task-block">
+                <h3>{{ task.content }}</h3>
+                {% if task.is_done is True %}
+                  <h4 class="text-danger">Not Done</h4>
+                {% else %}
+                  <h4 class="text-success">Done</h4>
+                {% endif %}
+
+                <div class="task-details">
+                  <div class="details-left">
+                    <p class="data-created">Data created: {{ task.datetime }}</p>
+                  </div>
+                  <div class="details-right">
+                    <p class="deadline text-danger">Deadline: {{ task.deadline }}</p>
+                  </div>
+                </div>
+
+                <div class="tags-container">
+                  <p><b>Tags:</b>
+                    {% for tag in task.tags.all %}
+                      <span style="display: inline-block;">{{ tag.name }}</span>
+                    {% endfor %}
+                  </p>
+                  <form method="POST" action="{% url "todo_list:task-delete" task.id %}" class="inline-position">
+                    {% csrf_token %}<input class="btn btn-primary" type="submit" value="Delete">
+                  </form>
+                  <form method="get" action="{% url "todo_list:task-update" task.id %}" class="inline-position">
+                    {% csrf_token %}<input class="btn btn-primary" type="submit" value="Update">
+                  </form>
+                </div>
+
+
+                <form action="{% url "todo_list:task-status" task.pk %}" method="post" class="task-status-form">
+                  {% csrf_token %}
+                  {% if task.is_done is True %}
+                    <button type="submit" class="btn btn-secondary float-right undo-btn">Undo</button>
+                  {% else %}
+                    <button type="submit" class="btn btn-success float-right complete-btn">Complete Task</button>
+                  {% endif %}
+                </form>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
