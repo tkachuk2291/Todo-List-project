@@ -33,7 +33,10 @@
                 </div>
 
                 <div class="tags-container">
-                  <p style="display: inline-block">Tags: {{ task.tags_related.name }}</p>
+                  {% for tag in task.tags_related.all %}
+
+                    <p style="display: inline-block">Tags: {{ tag.name }} }}</p>
+                  {% endfor %}
                   <form method="POST" action="{% url "todo_list:task-delete" task.id %}" class="inline-position">
                     {% csrf_token %}<input class="btn btn-primary" type="submit" value="Delete">
                   </form>
