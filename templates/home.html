@@ -14,7 +14,6 @@
           <br>
           <div class="tasks-container">
             {% for task in tasks_list %}
-              <h1>{{ task.tags }}</h1>
               <div class="task-block">
                 <h3>{{ task.content }}</h3>
                 {% if task.is_done is True %}
@@ -33,10 +32,11 @@
                 </div>
 
                 <div class="tags-container">
-                  {% for tag in task.tags_related.all %}
-
-                    <p style="display: inline-block">Tags: {{ tag.name }} }}</p>
-                  {% endfor %}
+                  <p><b>Tags:</b>
+                    {% for tag in task.tags.all %}
+                      <span style="display: inline-block;">{{ tag.name }}</span>
+                    {% endfor %}
+                  </p>
                   <form method="POST" action="{% url "todo_list:task-delete" task.id %}" class="inline-position">
                     {% csrf_token %}<input class="btn btn-primary" type="submit" value="Delete">
                   </form>
@@ -44,6 +44,7 @@
                     {% csrf_token %}<input class="btn btn-primary" type="submit" value="Update">
                   </form>
                 </div>
+
 
                 <form action="{% url "todo_list:task-status" task.pk %}" method="post" class="task-status-form">
                   {% csrf_token %}

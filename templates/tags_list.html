@@ -23,7 +23,7 @@
             </form>
           </td>
           <td>
-            <form method="POST" action="{% url "todo_list:tag-delete" tag.id %}">
+            <form method="post" action="{% url "todo_list:tag-delete" tag.id %}">
               {% csrf_token %}<input class="btn btn-secondary" type="submit" value="Delete">
             </form>
           </td>

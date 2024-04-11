@@ -1,4 +1,5 @@
 from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.views import generic, View
 
@@ -34,6 +35,7 @@ class HomeUpdateView(generic.UpdateView):
     form_class = TaskCreateForm
     template_name = "task_create.html"
     context_object_name = "task_update"
+    success_url = reverse_lazy("todo_list:home-page")
 
 
 class TagsListView(generic.ListView):
@@ -46,7 +48,6 @@ class TagsCreateView(generic.CreateView):
     model = Tag
     form_class = TagCreateForm
     template_name = "tags_create.html"
-    context_object_name = "tag_list"
     success_url = reverse_lazy("todo_list:tags")
 
 
