@@ -70,9 +70,6 @@ class StatusTask(View):
 
     def post(self, request, pk):
         task = Task.objects.get(id=pk)
-        if task.is_done is True:
-            task.is_done = False
-        else:
-            task.is_done = True
+        task.is_done = not task.is_done
         task.save()
         return HttpResponseRedirect(reverse_lazy("todo_list:home-page"))
